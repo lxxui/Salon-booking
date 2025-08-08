@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
 }
@@ -36,3 +37,120 @@
     transform: rotate(360deg);
   }
 }
+/****/
+
+body {
+  font-family: 'Prompt', sans-serif;
+}
+:root {
+  --color-primary: #A3C9C9;         /* สีหลัก Soft teal */
+  --color-secondary: #F6F1F1;       /* สีรอง Pinkish white */
+  --color-background: #FAFAFA;      /* สีพื้นหลัง Very light gray */
+  --color-text: #4A4A4A;            /* สีข้อความ Dark gray */
+  --color-accent: #FADCD9;          /* สีเน้นชมพูอ่อน */
+  --color-border: #D8D8D8;          /* สีเส้นขอบอ่อน */
+  --color-button-hover: #8AB4B4;    /* สีปุ่มเวลาผ่าน */
+}
+
+body {
+  background-color: var(--color-background);
+  font-family: 'Prompt', sans-serif;
+  color: var(--color-text);
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* ปุ่มหลัก */
+.btn-primary {
+  background-color: var(--color-primary);
+  border: none;
+  border-radius: 12px;
+  padding: 14px 0;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: white;
+  transition: background-color 0.3s ease;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-button-hover);
+}
+
+/* การ์ดบริการ */
+.service-card {
+  flex: 1 1 40%;
+  cursor: pointer;
+  padding: 14px 0;
+  border-radius: 12px;
+  text-align: center;
+  user-select: none;
+  border: 2px solid var(--color-border);
+  color: var(--color-text);
+  font-weight: 400;
+  transition: all 0.3s ease;
+  background-color: transparent;
+  margin-bottom: 1rem;
+}
+
+.service-card.selected {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  font-weight: 600;
+  background-color: var(--color-secondary);
+}
+
+/* Input, select */
+input[type="text"],
+input[type="tel"],
+input[type="date"],
+select {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+  color: var(--color-text);
+  background-color: white;
+  box-sizing: border-box;
+  margin-bottom: 1.2rem;
+}
+
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="date"]:focus,
+select:focus {
+  border-color: var(--color-primary);
+}
+
+/* หัวข้อ */
+h2, h3 {
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* ข้อความแจ้งเลือกบริการ */
+.alert-primary {
+  background-color: var(--color-secondary);
+  color: var(--color-primary);
+  text-align: center;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  font-weight: 600;
+}
+
+
+
+
