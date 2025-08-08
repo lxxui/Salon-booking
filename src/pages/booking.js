@@ -268,57 +268,51 @@ function Booking() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const totalPrice = selectedServices.reduce((sum, id) => {
-            const service = servicesList.find(s => s.id === id);
-            const adjustmentPrice = adjustments[id]?.price ? parseFloat(adjustments[id].price) : 0;
-            return sum + (service ? service.basePrice : 0) + adjustmentPrice;
-        }, 0);
+        let totalPrice = 0;
+        const serviceSummary = selectedServices.map((id) => {
+            const service = servicesList.find((s) => s.id === id);
+            const base = service.basePrice;
+            const adjustmentPrice =
+                adjustments[id] && adjustments[id].price ? parseFloat(adjustments[id].price) : 0;
+            totalPrice += base + adjustmentPrice;
+            const note = adjustments[id] && adjustments[id].note ? adjustments[id].note : '-';
+            return {
+                name: service.name,
+                price: base + adjustmentPrice,
+                note,
+            };
+        });
 
         const bookingData = {
-            name: formData.name,
-            phone: formData.phone,
-            date: formData.date,
-            time: formData.time,
-            services: selectedServices.map(id => {
-                const service = servicesList.find(s => s.id === id);
-                return {
-                    id: service.id,
-                    name: service.name,
-                    basePrice: service.basePrice,
-                    adjustment: adjustments[id] || {}
-                };
-            }),
+            customerName: formData.name,
+            customerPhone: formData.phone,
+            bookingDate: formData.date,
+            bookingTime: formData.time,
+            services: serviceSummary,
             totalPrice,
-            status: "pending",
+            status: 'pending',
         };
 
         try {
-            const res = await fetch("https://your-backend/api/bookings", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
+            const response = await fetch('/api/bookings', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(bookingData),
             });
 
-            if (res.ok) {
-                alert("จองคิวสำเร็จ!");
-                // reset state
+            if (response.ok) {
+                alert('จองคิวสำเร็จ!');
                 setSelectedServices([]);
                 setAdjustments({});
                 setFormData({ name: '', phone: '', date: '', time: '' });
                 setShowForm(false);
             } else {
-                alert("เกิดข้อผิดพลาด กรุณาลองใหม่");
+                alert('เกิดข้อผิดพลาดในการบันทึกข้อมูล กรุณาลองใหม่');
             }
         } catch (error) {
-            alert("เกิดข้อผิดพลาด กรุณาลองใหม่");
+            alert('เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่');
         }
     };
-
-
-    setSelectedServices([]);
-    setAdjustments({});
-    setFormData({ name: '', phone: '', date: '', time: '' });
-    setShowForm(false);
 
 
     return (
