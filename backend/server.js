@@ -10,7 +10,7 @@ app.use(express.json());
 // ตั้งค่าการเชื่อมต่อ MySQL
 const pool = mysql.createPool({
   host: 'localhost',
-  user: '',
+  user: 'your_mysql_user',
   password: '',
   database: 'salon-booking',
   waitForConnections: true,
