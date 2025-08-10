@@ -218,7 +218,7 @@ function Booking() {
     const bookingNumber = '01';
 
 
-    // ข้อมูลปรับราคาหรือหมายเหตุในใบจอง
+    // ข้อมูลปรับราคาหรือหมายเหตุในใบจอง 
     const [adjustments, setAdjustments] = useState({});
 
     const toggleService = (id) => {
